@@ -1,0 +1,110 @@
+package myproject;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Student {
+  String name;
+  int rollNo;
+  float percentage;
+
+  Student(String name, int rollNo, float percentage) {
+    this.name = name;
+    this.rollNo = rollNo;
+    this.percentage = percentage;
+  }
+
+  void display() {
+    System.out.println("Name: " + name);
+    System.out.println("Roll No: " + rollNo);
+    System.out.println("Percentage: " + percentage);
+  }
+}
+public class WOW {
+  public static void main(String[] args) {
+    ArrayList<Student> studentList = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+
+    int choice = 0;
+
+    while (choice != 5) {
+      System.out.println("Enter your choice:");
+      System.out.println("1. Add student");
+      System.out.println("2. Delete student");
+      System.out.println("3. Display students");
+      System.out.println("4. Update percentage");
+      System.out.println("5. Exit");
+
+      choice = sc.nextInt();
+
+      switch (choice) {
+        case 1:
+          System.out.println("Enter name:");
+          String name = sc.next();
+          System.out.println("Enter roll no:");
+          int rollNo = sc.nextInt();
+          System.out.println("Enter percentage:");
+          float percentage = sc.nextFloat();
+
+          Student newStudent = new Student(name, rollNo, percentage);
+          studentList.add(newStudent);
+
+          System.out.println("Student added.");
+          break;
+
+        case 2:
+          System.out.println("Enter roll no to delete:");
+          int rollNoToDelete = sc.nextInt();
+
+          for (int i = 0; i < studentList.size(); i++) {
+            Student student = studentList.get(i);
+
+            if (student.rollNo == rollNoToDelete) {
+              studentList.remove(i);
+              System.out.println("Student deleted.");
+              break;
+            }
+          }
+
+          break;
+
+        case 3:
+          System.out.println("List of students:");
+
+          for (Student student : studentList) {
+            student.display();
+            System.out.println();
+          }
+
+          break;
+
+        case 4:
+          System.out.println("Enter roll no to update:");
+          int rollNoToUpdate = sc.nextInt();
+
+          for (int i = 0; i < studentList.size(); i++) {
+            Student student = studentList.get(i);
+
+            if (student.rollNo == rollNoToUpdate) {
+              System.out.println("Enter new percentage:");
+              float newPercentage = sc.nextFloat();
+              student.percentage = newPercentage;
+              System.out.println("Percentage updated.");
+              break;
+            }
+          }
+
+          break;
+
+        case 5:
+          System.exit(0);
+          break;
+
+        default:
+          System.out.println("Invalid choice.");
+      }
+    }
+  }
+}
+
+
+
