@@ -1,0 +1,55 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class CarRentalSystem extends JFrame implements ActionListener {
+    JLabel aadharLabel, panLabel, dlLabel, carLabel;
+    JTextField aadharTextField, panTextField, dlTextField;
+    JComboBox<String> carComboBox;
+    JButton submitButton;
+    
+    CarRentalSystem() {
+        setTitle("Car Rental System");
+        setSize(400, 300);
+        setLayout(new GridLayout(5, 2));
+        
+        aadharLabel = new JLabel("Aadhar Card Number");
+        panLabel = new JLabel("PAN Card Number");
+        dlLabel = new JLabel("Driving License Number");
+        carLabel = new JLabel("Choose a Car");
+        
+        aadharTextField = new JTextField();
+        panTextField = new JTextField();
+        dlTextField = new JTextField();
+        
+        String[] carList = {"Car 1", "Car 2", "Car 3", "Car 4", "Car 5"};
+        carComboBox = new JComboBox<>(carList);
+        
+        submitButton = new JButton("Submit");
+        submitButton.addActionListener(this);
+        
+        add(aadharLabel);
+        add(aadharTextField);
+        add(panLabel);
+        add(panTextField);
+        add(dlLabel);
+        add(dlTextField);
+        add(carLabel);
+        add(carComboBox);
+        add(new JLabel());
+        add(submitButton);
+        
+        setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
+            String aadhar = aadharTextField.getText();
+            String pan = panTextField.getText();
+            String dl = dlTextField.getText();
+            
+            if (aadhar.length() != 12 || !aadhar.matches("[0-9]+")) {
+                JOptionPane.showMessageDialog(this, "Invalid Aadhar Card Number", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (pan.length() != 10 || !pan.matches("[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}")) {
+                JOptionPane.showMessageDialog(this, "Invalid PAN Card Number", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (dl.length() != 15 || !dl.substring(0, 
